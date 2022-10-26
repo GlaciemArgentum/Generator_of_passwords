@@ -1,7 +1,7 @@
 from random import *
 from string import *
 from time import *
-
+;
 symb = punctuation
 password = []
 positive_answer = 'да'
