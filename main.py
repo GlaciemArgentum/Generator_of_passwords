@@ -1,7 +1,7 @@
 from random import *
 from string import *
 from time import *
-;
+
 symb = punctuation
 password = []
 positive_answer = 'да'
@@ -45,8 +45,7 @@ def correct_logic(type_, fig, len_, symb=0):
         return int(symb)
 
 
-length_of_password = input('Здравствуйте! Давайте придумаем вам пароль. Введите длину пароля: ')
-length_of_password = correct_answer(length_of_password, phrase='Длина пароля')
+length_of_password = correct_answer(input('Здравствуйте! Давайте придумаем вам пароль. Введите длину пароля: '), phrase='Длина пароля')
 if length_of_password == 0:
     for _ in range(5):
         print('.', end='')
@@ -54,23 +53,19 @@ if length_of_password == 0:
     print('\nСерьёзно?')
     sleep(1)
     while not (str(length_of_password).isdigit() and int(length_of_password) > 0):
-        length_of_password = input('Введите длину пароля нормально: ')
+        length_of_password = input('Длина пароля — это целое положительное число. Введите данные в необходимом '
+                                   'формате: ')
     length_of_password = int(length_of_password)
-options = input(f'Будем настраивать пароль? ({positive_answer}/{negative_answer}): ')
-options = correct_answer(options, 'Да/Нет')
+options = correct_answer(input(f'Будем настраивать пароль? ({positive_answer}/{negative_answer}): '), 'Да/Нет')
 if options == positive_answer:
-    quant_of_figures = input('Введите количество цифр: ')
-    quant_of_figures = correct_logic('fig', quant_of_figures, length_of_password)
-    quant_of_symbols = input('Введите количество символов: ')
-    quant_of_symbols = correct_logic('symb', quant_of_figures, length_of_password, quant_of_symbols)
+    quant_of_figures = correct_logic('fig', input('Введите количество цифр: '), length_of_password)
+    quant_of_symbols = correct_logic('symb', quant_of_figures, length_of_password, input('Введите количество символов: '))
     if quant_of_symbols > 0:
-        opt_symb = input(f'Будем настраивать используемые символы? ({positive_answer}/{negative_answer}): ')
-        opt_symb = correct_answer(opt_symb, 'Да/Нет')
+        opt_symb = correct_answer(input(f'Будем настраивать используемые символы? ({positive_answer}/{negative_answer}): '), 'Да/Нет')
     if quant_of_symbols > 0 and opt_symb == positive_answer:
         print('На данный момент используется стандартный список символов:', symb)
-        redact_symb = input(
-            'Вы можете изменить стандартный список (введите 1) или использовать только свои символы (введите 2): ')
-        redact_symb = correct_answer(redact_symb, 'choice')
+        redact_symb = correct_answer(input(
+            'Вы можете изменить стандартный список (введите 1) или использовать только свои символы (введите 2): '), 'choice')
         flag = negative_answer
         if redact_symb == '1':
             while flag == negative_answer:
@@ -86,12 +81,10 @@ if options == positive_answer:
                     for i in range(len(must_add)):
                         if must_add[i] not in (ascii_letters + digits + symb):
                             symb = symb + must_add[i]
-                flag = input(f'Закончить редактирование списка символов? ({positive_answer}/{negative_answer}): ')
-                flag = correct_answer(flag, 'Да/Нет')
+                flag = correct_answer(input(f'Закончить редактирование списка символов? ({positive_answer}/{negative_answer}): '), 'Да/Нет')
         if redact_symb == '2':
             symb = ''
-            must_add = input('Введите свои символы без пробелов (латиница и цифры не добавляются): ')
-            must_add = correct_answer(must_add, 'symb')
+            must_add = correct_answer(input('Введите свои символы без пробелов (латиница и цифры не добавляются): '), 'symb')
             for i in range(len(must_add)):
                 if must_add[i] not in (ascii_letters + digits + symb):
                     symb = symb + must_add[i]
