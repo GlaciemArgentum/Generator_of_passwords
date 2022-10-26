@@ -39,7 +39,6 @@ def correct_logic(type_, fig, len_, symb=0):
             if not (len_ >= int(fig)):
                 fig = input(
                     f'Колличество цифр должно быть не больше длины пароля. Введите число, которое не больше {len_}: ')
-
         return int(fig)
 
     if type_ == 'symb':
@@ -49,7 +48,6 @@ def correct_logic(type_, fig, len_, symb=0):
             if not (len_ - fig >= int(symb)):
                 symb = input(
                     f'Колличество символов и цифр должно быть не больше длины пароля. Введите число, которое не больше {len_ - fig}: ')
-
         return int(symb)
 
 
